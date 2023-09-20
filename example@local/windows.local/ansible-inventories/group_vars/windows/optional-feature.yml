@@ -1,0 +1,34 @@
+# code: language=ansible
+
+optional_feature:
+  optional_features:
+    # - name: VirtualMachinePlatform
+    # - name: Microsoft-Windows-Subsystem-Linux
+    # - name: Containers-DisposableClientVM
+    # - name: Microsoft-Hyper-V
+    #   include_parent: yes
+    # - name: TelnetClient
+    # - name: ClientForNFS-Infrastructure
+    #   include_parent: yes
+
+  groups:
+    - group1
+    - group2
+
+optional_feature_groups:
+  group1:
+    optional_features:
+      - name: VirtualMachinePlatform
+      - name: Microsoft-Windows-Subsystem-Linux
+      - name: Containers-DisposableClientVM
+      - name: Microsoft-Hyper-V
+        include_parent: yes
+
+  group2:
+    optional_features:
+      - name: TelnetClient
+
+  group3:
+    optional_features:
+      - name: ClientForNFS-Infrastructure
+        include_parent: yes
