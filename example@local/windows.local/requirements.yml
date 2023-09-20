@@ -1,0 +1,13 @@
+#!/usr/bin/env -S ansible-galaxy install -r
+
+roles:
+
+collections:
+  - name: ansible.windows
+
+  - name: chocolatey.chocolatey
+
+  - name: community.general
+
+  - name: community.docker
+
