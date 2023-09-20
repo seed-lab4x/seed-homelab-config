@@ -1,0 +1,46 @@
+# code: language=ansible
+
+winget:
+  packages:
+    # - name: "PowerShell"
+    #   id: 9MZ1SNWT0N5D
+    # - "WSL Manager"
+    # - "easyWSL"
+    # - "GWSL"
+    # - "WSATools - APK installer and more"
+    # - "Snipaste"
+    # - name: "Stretchly"
+    #   id: 9PP2B76LQQBN
+    # - "Dynamic Theme"
+
+  groups:
+    - use_id
+    - use_name
+
+winget_groups:
+  use_id:
+    packages:
+      - name: "PowerShell"
+        id: 9MZ1SNWT0N5D
+      - name: "Stretchly"
+        id: 9PP2B76LQQBN
+
+  use_name:
+    packages:
+      - "WSL Manager"
+      - "easyWSL"
+      - "GWSL"
+      - "WSATools - APK installer and more"
+      - "Snipaste"
+      - "Dynamic Theme"
+
+  can_choco:
+    packages:
+      - "Microsoft PowerToys"
+      - "Sysinternals Suite"
+      - "Bandizip"
+      - "Yubico Authenticator"
+
+      - "draw.io Diagrams"
+      - "Inkscape"
+      - "DBeaver CE"
