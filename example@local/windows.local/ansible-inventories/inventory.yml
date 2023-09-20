@@ -13,7 +13,7 @@ all:
       ansible_winrm_server_cert_validation: ignore
 
   children:
-    # docker system.init only support on localhost
+    # docker system.init only support on wsl
     docker:
       hosts:
         localhost:
@@ -21,3 +21,7 @@ all:
     wsl:
       hosts:
         localhost:
+
+    windows:
+      hosts:
+        windows.local:
