@@ -1,0 +1,105 @@
+# code: language=ansible
+
+chocolatey:
+  configs:
+
+  packages:
+    - name: chocolatey
+    - name: chocolatey-core.extension
+    - name: chocolatey-dotnetfx.extension
+    - name: chocolatey-fastanswers.extension
+    - name: chocolatey-windowsupdate.extension
+
+  groups:
+    - proxy
+    - tool
+    - creator
+    - developer
+    - sdk
+    - gamer
+    - wsl
+
+chocolatey_groups:
+  proxy:
+    configs:
+      - name: proxy
+        value: localhost:7890
+
+  runtime:
+    packages:
+      - name: vcredist-all
+      - name: dotnet-all
+      - name: dotnetfx
+      - name: dotnetcore-desktopruntime
+      - name: dotnet-desktopruntime
+
+  tool:
+    packages:
+      - name: powertoys
+      - name: sysinternals
+      - name: bandizip
+      # - name: zerotier-one
+      - name: tailscale
+      - name: clash-for-windows
+      - name: synctrayzor
+      - name: yubico-authenticator
+      - name: ccleaner
+      - name: fing
+
+  creator:
+    packages:
+      - name: potplayer
+      - name: obs-studio
+      - name: inkscape
+      - name: audacity
+      - name: obsidian
+      - name: drawio
+      - name: notion
+      - name: figma
+        ignore_checksums: true
+
+  developer:
+    packages:
+      - name: git
+      - name: git-credential-manager-for-windows
+      - name: github-desktop
+      - name: wsl
+      - name: wsl2
+      # use ms store version
+      # - name: wsl2-distro-manager
+      - name: docker-desktop
+      - name: sourcetree
+      - name: vscode
+      - name: intellijidea-ultimate
+      - name: arduino
+      - name: dbeaver
+      - name: fiddler
+      - name: wireshark
+
+  sdk:
+    packages:
+      # - name: javaruntime
+      # - name: microsoft-openjdk17
+      # - name: microsoft-openjdk11
+      # - name: temurin17
+      # - name: temurin11
+      # - name: temurin8
+      # - name: nodejs
+      - name: nvm
+      - name: nvs
+      - name: pyenv-win
+
+  gamer:
+    packages:
+      - name: geforce-experience
+      - name: steam
+      - name: epicgameslauncher
+      - name: ubisoft-connect
+        ignore_checksums: true
+      - name: ea-app
+        ignore_checksums: true
+
+  wsl:
+    packages:
+      # - name: wsl-debiangnulinux
+      # - name: wsl-ubuntu-2204
