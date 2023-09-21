@@ -1,0 +1,35 @@
+# code: language=ansible
+
+netsh:
+  port_proxy:
+
+  groups:
+    - test
+
+netsh_groups:
+  test:
+    port_proxy:
+      v4tov4:
+        - protocol: tcp
+          listenaddress: 0.0.0.0
+          listenport: 8001
+          connectaddress: 127.0.0.1
+          connectport: 9001
+      v4tov6:
+        - protocol: tcp
+          listenaddress: 0.0.0.0
+          listenport: 8002
+          connectaddress: ::1
+          connectport: 9002
+      v6tov4:
+        - protocol: tcp
+          listenaddress: ::1
+          listenport: 8003
+          connectaddress: 127.0.0.1
+          connectport: 9003
+      v6tov6:
+        - protocol: tcp
+          listenaddress: ::1
+          listenport: 8004
+          connectaddress: ::1
+          connectport: 9004
