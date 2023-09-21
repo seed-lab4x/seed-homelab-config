@@ -3,6 +3,8 @@
 netsh:
   port_proxy:
 
+  port_range:
+
   groups:
     - test
 
@@ -33,3 +35,43 @@ netsh_groups:
           listenport: 8004
           connectaddress: ::1
           connectport: 9004
+
+    port_range:
+      dynamic:
+        ipv4:
+          protocol: tcp
+          startport: 49152
+          numberofports: 16384
+          store: persistent
+        ipv6:
+          protocol: tcp
+          startport: 49152
+          numberofports: 16384
+          store: persistent
+      excluded:
+        ipv4:
+          - protocol: tcp
+            startport: 8000
+            numberofports: 2000
+            store: persistent
+          - protocol: tcp
+            startport: 3000
+            numberofports: 1
+            store: persistent
+          - protocol: tcp
+            startport: 6000
+            numberofports: 1000
+            store: persistent
+        ipv6:
+          - protocol: tcp
+            startport: 8000
+            numberofports: 2000
+            store: persistent
+          - protocol: tcp
+            startport: 3000
+            numberofports: 1
+            store: persistent
+          - protocol: tcp
+            startport: 6000
+            numberofports: 1000
+            store: persistent
