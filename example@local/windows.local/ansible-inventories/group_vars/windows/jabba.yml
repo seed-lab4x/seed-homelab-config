@@ -1,0 +1,11 @@
+# code: language=ansible
+
+jabba:
+  # home: '%USERPROFILE%/.jabba'
+  home: 'D:\cache\.jabba'
+  # url: https://github.com/shyiko/jabba/raw/master/install.ps1
+  jdk:
+    - adopt@1.11.0-11
+    - adopt@1.8.0-292
+    - openjdk@1.17.0
+    - openjdk@1.11.0-2
