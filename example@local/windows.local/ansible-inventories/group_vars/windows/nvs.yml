@@ -1,0 +1,8 @@
+# code: language=ansible
+
+nvs:
+  node: 'D:\cache\nvs_node'
+  nodejs:
+    - 14.21.2
+    - 16.19.0
+    - 18.13.0
