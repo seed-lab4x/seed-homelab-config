@@ -1,0 +1,11 @@
+# code: language=ansible
+
+# CAREFUL: variables merged with same host at other group
+# https://docs.ansible.com/ansible/2.7/user_guide/intro_inventory.html#how-variables-are-merged
+
+nvm:
+  root: 'D:\cache\nvm_root'
+  nodejs:
+    - 14.21.2
+    - 16.19.0
+    - 18.13.0
