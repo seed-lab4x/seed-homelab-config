@@ -1,0 +1,27 @@
+# code: language=ansible
+
+command:
+  # set type_debug None noset AnsibleUndefined
+  commands:
+    # - whoami
+    # - cmd: whoami.exe /all
+    # - cmd: powershell.exe -
+    #   stdin: Write-Host test
+
+  groups:
+    - group1
+    - group2
+
+command_groups:
+  group1:
+    commands:
+      - whoami
+
+  group2:
+    commands:
+      - cmd: whoami.exe /all
+
+  group3:
+    commands:
+      - cmd: powershell.exe -
+        stdin: Write-Host test
