@@ -1,0 +1,28 @@
+# code: language=ansible
+
+workspace:
+  package:
+    - sshpass
+    - rsync
+    - git
+    - jq
+  pip:
+    - jsondiff==2.0.0
+    - jmespath==1.0.1
+    # bug for https://github.com/yaml/pyyaml/issues/724
+    - PyYAML==5.3.1
+    - lxml==4.9.2
+    # bug for https://github.com/docker/docker-py/issues/3113
+    - requests==2.28.1
+    # for edgeos seed-ssh.init|loop ansible hosts configure ssh config
+    - paramiko==3.3.1
+    # for edgeos network_cli with ssh key https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/network_cli_connection.html
+    - ansible-pylibssh==1.1.0
+
+ssh:
+  name: edgeos.local
+  group: ssh
+  approve_task: "{{ inventory_dir }}/../../../../edgeos/seed/seed-ssh.approve.yml"
+
+system:
+  group: none
