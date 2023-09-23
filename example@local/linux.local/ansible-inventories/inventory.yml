@@ -16,3 +16,7 @@ all:
     docker:
       hosts:
         linux.local:
+
+    linux:
+      hosts:
+        linux.local:
