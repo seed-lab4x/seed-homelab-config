@@ -3,6 +3,8 @@
 roles:
   - name: stephdewit.nvm
 
+  - name: comcast.sdkman
+
 collections:
 
   - name: community.general

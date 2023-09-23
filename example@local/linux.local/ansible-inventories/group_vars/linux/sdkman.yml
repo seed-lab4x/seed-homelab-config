@@ -1,0 +1,39 @@
+# code: language=ansible
+
+sdkman:
+  mode: role
+  sdkman_install_packages:
+    - candidate: gradle
+      version: 4.5
+    - candidate: gradle
+      version: 5.6
+    - candidate: gradle
+      version: 6.5
+    - candidate: gradle
+      version: 7.6
+    - candidate: maven
+      version: 3.3.9
+    - candidate: maven
+      version: 3.5.4
+    - candidate: maven
+      version: 3.6.3
+    - candidate: maven
+      version: 3.8.7
+    - candidate: java
+      version: 8.0.265-open
+    - candidate: java
+      version: 8.0.352-tem
+    - candidate: java
+      version: 11.0.17-tem
+    - candidate: java
+      version: 17.0.5-tem
+    - candidate: java
+      version: 19.0.1-tem
+    - candidate: java
+      version: 1.8.0-oracle
+      localpath: /Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk
+  sdkman_defaults:
+    # fix comcast.sdkman : Set SDK defaults requires string as left operand, not float
+    gradle: '6.5'
+    maven: '3.6.3'
+    java: '17.0.5-tem'
