@@ -1,0 +1,21 @@
+# code: language=ansible
+
+nvm:
+  mode: role
+  # version: 0.39.3
+  repository: https://ghproxy.com/https://github.com/creationix/nvm.git
+  default_packages: |
+    bower
+    grunt-cli
+  # root: "{{ ansible_env.HOME }}/.nvm"
+  nodejs:
+    - 14.21.2
+    - 16.19.0
+    - 18.13.0
+  default: 18.13.0
+  package:
+    - packages:
+        - name: bower
+          global: true
+        - name: grunt-cli
+          global: true
