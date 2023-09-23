@@ -1,0 +1,23 @@
+# code: language=ansible
+
+config:
+  # set type_debug None noset AnsibleUndefined
+  lines:
+    # - set system ntp server 0.ubnt.pool.ntp.org
+
+  groups:
+    - group1
+    - group2
+
+command_groups:
+  group1:
+    lines:
+      - set system ntp server 1.ubnt.pool.ntp.org
+
+  group2:
+    lines:
+      - set system ntp server 2.ubnt.pool.ntp.org
+
+  group3:
+    lines:
+      - set system ntp server 3.ubnt.pool.ntp.org
