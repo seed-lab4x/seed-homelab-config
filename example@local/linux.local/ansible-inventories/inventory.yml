@@ -1,0 +1,18 @@
+# code: language=ansible
+
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+    linux.local:
+
+  children:
+    # ssh.init support
+    ssh:
+      hosts:
+        linux.local:
+
+    # docker system.init support
+    docker:
+      hosts:
+        linux.local:
