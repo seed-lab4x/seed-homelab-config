@@ -1,0 +1,22 @@
+# code: language=ansible
+
+command:
+  commands:
+    - show host name
+    - show host os
+    - show date
+    - show hardware cpu
+    - show hardware mem
+
+  groups:
+    - ipv6_nodns
+    - upnp
+
+command_groups:
+  ipv6_nodns:
+    commands:
+      - show ipv6 route
+
+  upnp:
+    commands:
+      - show upnp2 rules
