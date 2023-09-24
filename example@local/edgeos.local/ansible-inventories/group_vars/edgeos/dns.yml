@@ -1,0 +1,26 @@
+# code: language=ansible
+
+dns:
+  lines:
+    - delete service dns forwarding options
+
+  groups:
+    # - group1
+    # - group2
+    - csv
+
+dns_groups:
+  group1:
+    lines:
+      - set service dns forwarding options address=/local/127.0.0.1
+
+  group2:
+    lines:
+      - 'set service dns forwarding options server=/netflix.com/#'
+      - 'set service dns forwarding options address=/netflix.com/::'
+
+  csv:
+    lines:
+      csv: "{{ inventory_dir }}/../../dns.csv"
+      template: "{{ inventory_dir }}/../../dns.csv.2-edgeos-dns.j2"
+      batch: 5

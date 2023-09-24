@@ -1,0 +1,22 @@
+{%- if item is defined and items is undefined -%}
+{%- set items = [item] -%}
+{%- endif -%}
+
+{% if items is defined and items | type_debug == 'list' %}
+{%   for item in items %}
+{%     if item.location in location[location.at] and item.domain != '' %}
+{%       if item.ip != '' %}
+set service dns forwarding options address=/{{ item.domain }}/{{ item.ip }}
+{%       endif  %}
+
+{%       if item.server != '' %}
+set service dns forwarding options server=/{{ item.domain }}/{{ item.server }}
+{%       endif  %}
+
+{%       if item.address != '' %}
+set service dns forwarding options address=/{{ item.domain }}/{{ item.address }}
+{%       endif  %}
+
+{%     endif %}
+{%   endfor %}
+{% endif %}
