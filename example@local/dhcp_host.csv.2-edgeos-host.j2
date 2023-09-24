@@ -1,0 +1,11 @@
+{%- if items is defined and items | type_debug == 'list' -%}
+{%    for item in items %}
+{%      if item is defined and item.location in location[location.at] and item.cl_name != '' and item.ip_addr != '' %}
+set system static-host-mapping host-name {{ item.cl_name }} inet {{ item.ip_addr }}
+set system static-host-mapping host-name {{ item.cl_name }} alias {{ item.cl_name }}.lan
+{%      endif %}
+{%    endfor %}
+{%- elif item is defined and item.location in location[location.at] and item.cl_name != '' and item.ip_addr != '' -%}
+set system static-host-mapping host-name {{ item.cl_name }} inet {{ item.ip_addr }}
+set system static-host-mapping host-name {{ item.cl_name }} alias {{ item.cl_name }}.lan
+{%- endif -%}

@@ -1,0 +1,27 @@
+# code: language=ansible
+
+host:
+  lines:
+    - delete system static-host-mapping host-name
+
+  groups:
+    # - group1
+    # - group2
+    - csv
+
+host_groups:
+  group1:
+    lines:
+      - set system static-host-mapping host-name erx1 inet 192.168.100.1
+      - set system static-host-mapping host-name erx1 alias erx1.lan
+
+  group2:
+    lines:
+      - set system static-host-mapping host-name erx2 inet 192.168.100.2
+      - set system static-host-mapping host-name erx2 alias erx2.lan
+
+  csv:
+    lines:
+      csv: "{{ inventory_dir }}/../../dhcp_host.csv"
+      template: "{{ inventory_dir }}/../../dhcp_host.csv.2-edgeos-host.j2"
+      batch: 5
