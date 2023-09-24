@@ -1,0 +1,30 @@
+# code: language=ansible
+
+dhcp:
+  lines:
+    - delete service dhcp-server
+    - set service dhcp-server shared-network-name LAN subnet 192.168.100.0/24
+
+  groups:
+    # - group1
+    # - group2
+    - csv
+
+dhcp_groups:
+  group1:
+    lines:
+      - set service dhcp-server shared-network-name LAN subnet 192.168.100.0/24 static-mapping erx1
+      - set service dhcp-server shared-network-name LAN subnet 192.168.100.0/24 static-mapping erx1 ip-address 192.168.100.1
+      - set service dhcp-server shared-network-name LAN subnet 192.168.100.0/24 static-mapping erx1 mac-address 00:00:00:00:00:01
+
+  group2:
+    lines:
+      - set service dhcp-server shared-network-name LAN subnet 192.168.100.0/24 static-mapping erx2
+      - set service dhcp-server shared-network-name LAN subnet 192.168.100.0/24 static-mapping erx2 ip-address 192.168.100.2
+      - set service dhcp-server shared-network-name LAN subnet 192.168.100.0/24 static-mapping erx2 mac-address 00:00:00:00:00:02
+
+  csv:
+    lines:
+      csv: "{{ inventory_dir }}/../../dhcp_host.csv"
+      template: "{{ inventory_dir }}/../../dhcp_host.csv.2-edgeos-dhcp.j2"
+      batch: 5

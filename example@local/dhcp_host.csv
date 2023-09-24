@@ -1,0 +1,3 @@
+location,tag,leasetime,ip_addr,mac,cl_name,comment
+"home","gateway_erx","infinite","192.168.100.1","00:00:00:00:00:01","erx1","lan-edgeos-1"
+"home","gateway_erx","infinite","192.168.100.2","00:00:00:00:00:02","erx2","lan-edgeos-2"

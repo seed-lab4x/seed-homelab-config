@@ -1,0 +1,13 @@
+{%- if items is defined and items | type_debug == 'list' -%}
+{%    for item in items %}
+{%      if item is defined and item.location in location[location.at] and item.cl_name != '' and item.ip_addr != '' and item.mac != '' %}
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping {{ item.cl_name }}
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping {{ item.cl_name }} ip-address {{ item.ip_addr }}
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping {{ item.cl_name }} mac-address {{ item.mac }}
+{%      endif %}
+{%    endfor %}
+{%- elif item is defined and item.location in location[location.at] and item.cl_name != '' and item.ip_addr != '' and item.mac != '' -%}
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping {{ item.cl_name }}
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping {{ item.cl_name }} ip-address {{ item.ip_addr }}
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 static-mapping {{ item.cl_name }} mac-address {{ item.mac }}
+{%- endif -%}
