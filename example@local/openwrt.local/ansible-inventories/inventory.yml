@@ -14,3 +14,7 @@ all:
         ansible_user: root
         # use legacy scp/rcp https://forum.openwrt.org/t/ash-usr-libexec-sftp-server-not-found-when-using-scp/125772/2
         ansible_scp_extra_args: '-O -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+
+    openwrt:
+      hosts:
+        openwrt.local:
