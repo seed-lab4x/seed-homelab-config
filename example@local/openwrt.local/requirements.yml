@@ -1,0 +1,8 @@
+#!/usr/bin/env -S ansible-galaxy install -r
+
+roles:
+  - name: gekmihesg.openwrt
+
+collections:
+
+  - name: community.general
