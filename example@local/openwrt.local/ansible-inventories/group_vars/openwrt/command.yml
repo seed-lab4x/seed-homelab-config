@@ -1,0 +1,18 @@
+# code: language=ansible
+
+command:
+  commands:
+    - date
+
+  groups:
+    - group1
+    - group2
+
+command_groups:
+  group1:
+    commands:
+      - cat /etc/openwrt_release
+
+  group2:
+    commands:
+      - cat /etc/opkg/distfeeds.conf
