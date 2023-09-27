@@ -1,0 +1,31 @@
+{%- if items is defined and items | type_debug == 'list' -%}
+{%    for item in items %}
+{%      if item is defined and item.location in location[location.at] and item.cl_name != '' and item.mac != '' and item.ip_addr != '' %}
+uci add dhcp host
+uci set dhcp.@host[-1].mac='{{ item.mac }}'
+uci set dhcp.@host[-1].name='{{ item.cl_name }}'
+uci set dhcp.@host[-1].dns='1'
+uci set dhcp.@host[-1].ip='{{ item.ip_addr }}'
+{%     if item.tag != '' %}
+uci set dhcp.@host[-1].tag='{{ item.tag }}'
+{%     endif %}
+{%     if item.leasetime != '' %}
+uci set dhcp.@host[-1].leasetime='{{ item.leasetime }}'
+{%     endif %}
+{%      endif %}
+{%    endfor %}
+uci commit
+{%- elif item is defined and item.location in location[location.at] and item.cl_name != '' and item.mac != '' and item.ip_addr != '' %}
+uci add dhcp host
+uci set dhcp.@host[-1].mac='{{ item.mac }}'
+uci set dhcp.@host[-1].name='{{ item.cl_name }}'
+uci set dhcp.@host[-1].dns='1'
+uci set dhcp.@host[-1].ip='{{ item.ip_addr }}'
+{%     if item.tag != '' %}
+uci set dhcp.@host[-1].tag='{{ item.tag }}'
+{%     endif %}
+{%     if item.leasetime != '' %}
+uci set dhcp.@host[-1].leasetime='{{ item.leasetime }}'
+{%     endif %}
+uci commit
+{% endif %}

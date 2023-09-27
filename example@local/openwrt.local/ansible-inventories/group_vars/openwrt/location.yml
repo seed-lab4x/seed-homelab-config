@@ -1,0 +1,17 @@
+# code: language=ansible
+
+# for filter dhcp item by template csv
+location:
+  at: at_home
+  at_home:
+    - home
+    - www-to-cloud
+    - lan-to-home
+    - tail-to-work
+    - tail-to-vps
+  at_work:
+    - work
+    - www-to-cloud
+    - tail-to-home
+    - lan-to-work
+    - tail-to-vps

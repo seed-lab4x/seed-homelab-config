@@ -1,0 +1,33 @@
+# code: language=ansible
+
+dhcp:
+  lines:
+    - while uci -q delete dhcp.@host[0]; do :; done
+    - uci commit
+
+  groups:
+    # - group1
+    # - group2
+    - csv
+
+dhcp_groups:
+  group1:
+    lines:
+      - uci add dhcp host
+      - uci set dhcp.@host[-1].mac='00:00:00:00:00:01'
+      - uci set dhcp.@host[-1].name='erx1'
+      - uci set dhcp.@host[-1].dns='1'
+      - uci set dhcp.@host[-1].ip='192.168.100.1'
+
+  group2:
+    lines:
+      - uci add dhcp host
+      - uci set dhcp.@host[-1].mac='00:00:00:00:00:02'
+      - uci set dhcp.@host[-1].name='erx2'
+      - uci set dhcp.@host[-1].dns='1'
+      - uci set dhcp.@host[-1].ip='192.168.100.2'
+
+  csv:
+    lines:
+      csv: "{{ inventory_dir }}/../../dhcp_host.csv"
+      template: "{{ inventory_dir }}/../../dhcp_host.csv.2-openwrt-dhcp-host.j2"
