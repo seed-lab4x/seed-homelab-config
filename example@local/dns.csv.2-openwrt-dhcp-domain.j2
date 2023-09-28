@@ -1,0 +1,33 @@
+{%- if item is defined and items is undefined -%}
+{%- set items = [item] -%}
+{%- endif -%}
+
+{% if items is defined and items | type_debug == 'list' %}
+{%   for item in items %}
+{%     if item.location in location[location.at] and item.domain != '' %}
+{%       if item.ip != '' and item.hostname == '' %}
+uci add dhcp domain
+uci set dhcp.@domain[-1].name='{{ item.domain }}'
+uci set dhcp.@domain[-1].ip='{{ item.ip }}'
+{%       elif item.ip != '' and item.hostname != '' %}
+uci add dhcp domain
+uci set dhcp.@domain[-1].name='{{ item.hostname }}'
+uci set dhcp.@domain[-1].ip='{{ item.ip }}'
+{%       endif  %}
+
+{%       if item.server != '' and item.hostname == '' %}
+uci add_list dhcp.@dnsmasq[0].server='/{{ item.domain }}/{{ item.server }}'
+{%       elif item.server != '' and item.hostname != '' %}
+uci add_list dhcp.@dnsmasq[0].server='/{{ item.hostname }}/{{ item.server }}'
+{%       endif  %}
+
+{%       if item.address != '' and item.hostname == '' %}
+uci add_list dhcp.@dnsmasq[0].address='/{{ item.domain }}/{{ item.address }}'
+{%       elif item.address != '' and item.hostname != '' %}
+uci add_list dhcp.@dnsmasq[0].address='/{{ item.hostname }}/{{ item.address }}'
+{%       endif  %}
+
+{%     endif %}
+{%   endfor %}
+{% endif %}
+uci commit

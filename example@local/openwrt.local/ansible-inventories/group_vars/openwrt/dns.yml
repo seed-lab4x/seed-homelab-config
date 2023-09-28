@@ -1,0 +1,31 @@
+# code: language=ansible
+
+dns:
+  lines:
+    - while uci -q delete dhcp.@domain[0]; do :; done
+    - uci commit
+
+  groups:
+    # - group1
+    # - group2
+    - csv
+
+dns_groups:
+  group1:
+    lines:
+      - uci add dhcp domain
+      - uci set dhcp.@domain[-1].name='erx1'
+      - uci set dhcp.@domain[-1].ip='192.168.100.1'
+      - uci commit
+
+  group2:
+    lines:
+      - uci add dhcp domain
+      - uci set dhcp.@domain[-1].name='erx2'
+      - uci set dhcp.@domain[-1].ip='192.168.100.2'
+      - uci commit
+
+  csv:
+    lines:
+      csv: "{{ inventory_dir }}/../../dns.csv"
+      template: "{{ inventory_dir }}/../../dns.csv.2-openwrt-dhcp-domain.j2"
