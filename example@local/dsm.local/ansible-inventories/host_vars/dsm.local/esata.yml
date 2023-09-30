@@ -1,0 +1,12 @@
+# code: language=ansible
+
+esata:
+  portcfg:
+    internal:
+      # location: '___________+++++'
+      # bin: '0000000000011111'
+      # hex: '0x1f'
+    esata:
+      # location: '__________+_____'
+      # bin: '0000000000100000'
+      # hex: '0x20'
