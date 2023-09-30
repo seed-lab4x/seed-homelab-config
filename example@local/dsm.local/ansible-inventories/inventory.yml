@@ -1,0 +1,19 @@
+# code: language=ansible
+
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+    dsm.local:
+      ansible_user: dsm
+      ansible_remote_tmp: /tmp
+      env_path: /sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin
+
+  children:
+    ssh:
+      hosts:
+        dsm.local:
+
+    docker:
+      hosts:
+        dsm.local:
