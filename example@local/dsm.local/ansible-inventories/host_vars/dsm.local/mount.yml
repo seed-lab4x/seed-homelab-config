@@ -1,0 +1,5 @@
+# code: language=ansible
+
+mount:
+  shared:
+    - /volume1
