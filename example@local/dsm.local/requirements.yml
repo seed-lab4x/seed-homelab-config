@@ -1,6 +1,7 @@
 #!/usr/bin/env -S ansible-galaxy install -r
 
 roles:
+  - name: mrlesmithjr.mdadm
 
 collections:
   - name: community.general

@@ -1,0 +1,13 @@
+
+nvme:
+  pool:
+    part:
+      - /dev/nvme0n1
+      - /dev/nvme1n1
+    mdadm:
+      - name: 'md10'
+        level: '1'
+        devices:
+          - '/dev/nvme0n1p3'
+          - '/dev/nvme1n1p3'
+        filesystem: 'btrfs'
