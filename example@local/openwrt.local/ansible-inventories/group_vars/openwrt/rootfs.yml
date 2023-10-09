@@ -1,0 +1,11 @@
+# code: language=ansible
+
+rootfs:
+  # partition:
+  #   dev: /dev/sda2
+  #   disk: /dev/sda
+  #   part: 2
+  #   reboot: true
+  filesystem:
+    fsck: true
+    reboot: true
