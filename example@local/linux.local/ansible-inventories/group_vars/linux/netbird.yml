@@ -1,0 +1,7 @@
+# code: language=ansible
+
+netbird:
+  # setupkey: YOUR_KEY
+  # network:
+  #   flags: |
+  #     --admin-url https://app.netbird.io:443
