@@ -1,0 +1,6 @@
+# code: language=ansible
+
+zerotier:
+  # token: YOUR_TOKEN
+  # networks:
+  #   - YOUR_NETWORK_ID
