@@ -1,0 +1,14 @@
+# code: language=ansible
+
+zerotier:
+  # token: YOUR_TOKEN
+  # networks:
+  #   - YOUR_NETWORK_ID
+
+  # uci:
+  #   firewall:
+  #     forwarding:
+  #       - src: lan
+  #       - dest: lan
+  #       - dest: wan
+  #       - dest: docker
