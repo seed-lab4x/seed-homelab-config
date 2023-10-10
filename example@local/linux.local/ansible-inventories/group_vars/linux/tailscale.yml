@@ -1,0 +1,13 @@
+# code: language=ansible
+
+tailscale:
+  # script:
+  #   env:
+  #     http_proxy: http://localhost:7890
+  #     https_proxy: http://localhost:7890
+  #     HTTP_PROXY: http://localhost:7890
+  #     HTTPS_PROXY: http://localhost:7890
+  # authkey: YOUR_TOKEN
+  # network:
+  #   flags: |
+  #     --advertise-exit-node
