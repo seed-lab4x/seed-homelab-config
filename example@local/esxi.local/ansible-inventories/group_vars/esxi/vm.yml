@@ -1,0 +1,192 @@
+# code: language=ansible
+
+vm:
+  groups:
+    - vcsa_iso_guest
+    - free_iso_guest
+    - vcsa_vmdk_guest
+    - free_vmdk_guest
+    - vcsa_vmdk_ovf
+
+vm_groups:
+  # vcsa esxi server iso from url and make cloudinit iso for init 
+  vcsa_iso_guest:
+    file:
+      - path: /vmfs/volumes/datastore1/ubuntu-22.04.3-desktop-amd64.iso
+        src: $HOME/.esxi/ubuntu-22.04.3-desktop-amd64.iso
+        url: https://releases.ubuntu.com/jammy/ubuntu-22.04.3-desktop-amd64.iso
+      # make cloudinit iso
+      - path: /vmfs/volumes/datastore1/ubuntu-cloudinit.iso
+        src: $HOME/.esxi/ubuntu-cloudinit.iso
+        cloudinit:
+          meta_data: |
+            instance-id: cloud-host-0
+            local-hostname: cloudhost
+          user_data:
+            #cloud-config
+            runcmd:
+              - echo 'Hello, World!' > /var/tmp/hello-world.txt
+
+            autoinstall:
+              version: 1
+              locale: en_US.UTF-8
+              keyboard:
+                layout: us
+              storage:
+                layout:
+                  name: lvm
+              identity:
+                hostname: ubuntu-server
+                username: ubuntu
+                password: "$6$exDY1mhS4KUYCE/2$zmn9ToZwTKLhCw.b4/b.ZRTIZM30JZ4QrOQ2aOXJ8yk96xpcCof0kxKwuX1kqLG/ygbJ1f8wxED22bTL4F46P0"
+              ssh:
+                install-server: yes
+                allow-pw: yes
+    guest:
+      name: "ubuntu-22"
+      guest_id: ubuntu64Guest
+      datastore: DATA
+      hardware:
+        boot_firmware: efi
+        num_cpus: 2
+        memory_mb: 2048
+        scsi: paravirtual
+      disks:
+        - size: 500gb
+          type: thin
+          datastore: DATA
+      cdrom:
+        - controller_type: ide
+          controller_number: 0
+          unit_number: 0
+          state: present
+          type: iso
+          iso_path: "[datastore1] ubuntu-22.04.3-desktop-amd64.iso"
+        - controller_type: ide
+          controller_number: 0
+          unit_number: 0
+          state: present
+          type: iso
+          iso_path: "[datastore1] ubuntu-cloudinit.iso"
+      networks:
+        - name: "Internal"
+          device_type: vmxnet3
+          connected: true
+          start_connected: true
+          ip: 192.168.1.200
+          netmask: 255.255.255.0
+          gateway: 192.168.1.1
+      customization:
+        dns_servers:
+          - 8.8.8.8
+
+  # free esxi server iso from url
+  free_iso_guest:
+    file:
+      - path: /vmfs/volumes/datastore1/ubuntu-20.04.6-desktop-amd64.iso
+        src: $HOME/.esxi/ubuntu-20.04.6-desktop-amd64.iso
+        url: https://releases.ubuntu.com/focal/ubuntu-20.04.6-desktop-amd64.iso
+    guest:
+      name: "ubuntu-20"
+      guest_id: ubuntu-64
+      hardware:
+        version: 15
+        num_cpus: 2
+        memory_mb: 2048
+      disks:
+        - size_gb: 10
+          type: "thin"
+          volname: "thin"
+      cdrom:
+        type: "iso"
+        iso_path: "/vmfs/volumes/datastore1/ubuntu-20.04.6-desktop-amd64.iso"
+      networks:
+        - networkName: VM Network
+          virtualDev: vmxnet3
+          cloudinit_ethernets:
+            eth0:
+              addresses: ["192.168.1.8/25"]
+              dhcp4: false
+              gateway4: 192.168.1.1
+              nameservers:
+                addresses: ["192.168.1.2", "8.8.8.8", "8.8.4.4"]
+                search: ["local.dougalseeley.com"]
+      cloudinit_userdata:
+        - name: dougal
+          primary_group: dougal
+          sudo: "ALL=(ALL) NOPASSWD:ALL"
+          groups: "admin"
+          home: "/media/filestore/home/dougal"
+          ssh_import_id: None
+          lock_passwd: false
+          passwd: $6$j212wezy$7...YPYb2F
+          ssh_authorized_keys: ['ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACA+.................GIMhdojtl6mzVn38vXMzSL29LQ== ansible@dougalseeley.com']
+
+  # vcsa esxi server vmdk from local file 
+  vcsa_vmdk_guest:
+    file:
+      # vmkfstools clone vmdk format thin
+      - path: /vmfs/volumes/datastore1/Openwrt22.clone/Openwrt22.vmdk
+        src: $HOME/.esxi/openwrt-22.03.5-x86-64-generic-squashfs-combined-efi.vmdk
+        vmkfstools:
+          path: /vmfs/volumes/datastore1/Openwrt22.clone/openwrt-22.03.5-x86-64-generic-squashfs-combined-efi.vmdk
+          clone:
+            format: thin
+    guest:
+      name: "openwrt-22-clone"
+      hardware:
+        version: 15
+        num_cpus: 1
+        memory_mb: 384
+      disks:
+        - size: 500gb
+          type: thin
+          datastore: DATA
+          filename: "[datastore1] Openwrt22.clone/Openwrt22.vmdk"
+      networks:
+        - networkName: VM Network
+          virtualDev: vmxnet3
+
+  # free esxi server vmdk from local file 
+  free_vmdk_guest:
+    file:
+      # vmkfstools extend vmdk
+      - path: /vmfs/volumes/datastore1/Openwrt22.extend/Openwrt22.vmdk
+        src: $HOME/.esxi/openwrt-22.03.5-x86-64-generic-squashfs-combined-efi.vmdk
+        vmkfstools:
+          path: /vmfs/volumes/datastore1/Openwrt22.extend/Openwrt22.vmdk
+          extend:
+            size: 1024M
+            # format: eagerzeroedthick
+    guest:
+      name: "openwrt-22-extend"
+      hardware:
+        version: 15
+        num_cpus: 1
+        memory_mb: 384
+      disks:
+        - size_gb: 1
+          type: "thin"
+          volname: "thin"
+          src:
+            backing_filename: "[datastore1] Openwrt22.extend/Openwrt22.vmdk"
+            copy_or_move: "copy"
+      networks:
+        - networkName: VM Network
+          virtualDev: vmxnet3
+
+  # vcsa esxi server ovf from local file 
+  vcsa_vmdk_ovf:
+    file:
+      - path: /vmfs/volumes/datastore1/Openwrt22.ovf/Openwrt22.ovf
+        src: $HOME/.esxi/openwrt-22.03.5-x86-64-generic-squashfs-combined-efi.vmdk
+    ovf:
+      datacenter: Datacenter1
+      esxi_hostname: "{{ vmware.hostname }}"
+      name: "openwrt-22-ovf"
+      datastore: datastore1
+      ovf: Openwrt22.ovf/Openwrt22.ovf
+      networks:
+        - networkName: VM Network
+          virtualDev: vmxnet3
+      power_on: false
