@@ -1,0 +1,6 @@
+# code: language=ansible
+
+vmware:
+  hostname: esxi.lan
+  username: root
+  # password: YOUR_PASSWOR
