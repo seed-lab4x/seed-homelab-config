@@ -1,0 +1,19 @@
+# code: language=ansible
+
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+    esxi.lan:
+
+  children:
+    ssh:
+      hosts:
+        esxi.lan:
+      vars:
+        ansible_user: root
+        ansible_remote_tmp: /vmfs/volumes/datastore1/tmp
+
+    esxi:
+      hosts:
+        esxi.lan:
