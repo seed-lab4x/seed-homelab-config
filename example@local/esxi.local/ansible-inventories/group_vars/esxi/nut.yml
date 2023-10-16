@@ -1,0 +1,7 @@
+# code: language=ansible
+
+nut:
+  upsname: ups@ups.lan
+  user: ups
+  # password: YOUR_PASSWOR
+  finaldelay: 60
