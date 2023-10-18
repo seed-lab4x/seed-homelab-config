@@ -14,6 +14,8 @@ workspace:
     - lxml==4.9.2
     # bug for https://github.com/docker/docker-py/issues/3113
     - requests==2.28.1
+  local: "{{ inventory_dir }}/../../../../"
+  seedpath: .seed
 
 ssh:
   name: dsm.local
