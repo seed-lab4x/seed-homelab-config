@@ -1,0 +1,34 @@
+# code: language=ansible
+
+headscale:
+  build:
+    apikeys: "{{ inventory_dir }}/host_vars/{{ inventory_hostname }}/headscale/apikey.yml"
+    preauthkeys: "{{ inventory_dir }}/host_vars/{{ inventory_hostname }}/headscale/preauthkeys.yml"
+    nodes: "{{ inventory_dir }}/host_vars/{{ inventory_hostname }}/headscale/nodes.yml"
+
+  apikeys:
+    k1:
+    k2: 
+  users:
+    u1:
+      preauthkeys:
+        p1: 1h
+        p2: 2h
+      nodes:
+        n1:
+        n2:
+    u2:
+      preauthkeys:
+        default:
+      nodes:
+        n1:
+        n2:
+
+  ui:
+    composes:
+      - file: docker-compose.yml
+        template: "{{ playbook_dir }}/docker-compose.yml"
+      - file: docker-compose@caddy.yml
+        src: "{{ inventory_dir }}/../headscale-ui/docker-compose@caddy.yml"
+      - file: docker-compose@traefik.yml
+        src: "{{ inventory_dir }}/../headscale-ui/docker-compose@traefik.yml"
