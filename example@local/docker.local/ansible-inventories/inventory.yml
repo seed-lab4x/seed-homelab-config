@@ -1,0 +1,12 @@
+# code: language=ansible
+
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+
+  children:
+    # docker system.init support
+    docker:
+      hosts:
+        localhost:
