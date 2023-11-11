@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  jenkins:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.jenkins.rule=Host(`jenkins.local`)"
+      - "traefik.http.services.jenkins.loadbalancer.server.port=8080"
+      - "traefik.docker.network=traefik_traefik"

@@ -1,0 +1,15 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  jenkins:
+    networks:
+      - caddy
+    labels:
+      caddy_0: jenkins.local, jenkins.local:80
+      caddy_0.reverse_proxy: "{{ upstreams 8080 }}"
+      caddy_1: master.jenkins.local, master.jenkins.local:80
+      caddy_1.reverse_proxy: "{{ upstreams 50000 }}"
