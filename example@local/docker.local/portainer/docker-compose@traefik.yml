@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  portainer:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.portainer.rule=Host(`portainer.local`)"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+      - "traefik.docker.network=traefik_traefik"

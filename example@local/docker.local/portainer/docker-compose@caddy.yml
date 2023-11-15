@@ -1,0 +1,13 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  portainer:
+    networks:
+      - caddy
+    labels:
+      caddy: portainer.local, portainer.local:80
+      caddy.reverse_proxy: "{{ upstreams 9000 }}"
