@@ -1,0 +1,21 @@
+# code: language=ansible
+
+tailscale:
+  # `opkg`(default) or `enabler`
+  # install: opkg
+  # when use enabler it can download pkg in advance
+  # enabler:
+  #   pkg: true
+
+  # authkey: YOUR_TOKEN
+  # network:
+  #   flags: |
+  #     --advertise-exit-node
+
+  # uci:
+  #   firewall:
+  #     forwarding:
+  #       - src: lan
+  #       - dest: lan
+  #       - dest: wan
+  #       - dest: docker
