@@ -1,0 +1,8 @@
+# code: language=ansible
+
+docker:
+  # dir: /mnt/docker/
+  # partition:
+  #   dev: /dev/sda3
+  #   disk: /dev/sda
+  #   part: 3
