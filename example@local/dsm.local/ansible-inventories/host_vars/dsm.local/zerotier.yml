@@ -1,0 +1,6 @@
+# code: language=ansible
+
+# zerotier:
+#   token: ?
+#   networks:
+#     - ?
