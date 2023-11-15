@@ -1,0 +1,15 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+    external: true
+
+services:
+  qinglong:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.qinglong.rule=Host(`qinglong.local`)"
+      - "traefik.http.services.qinglong.loadbalancer.server.port=5700"
+      - "traefik.docker.network=traefik_traefik"
