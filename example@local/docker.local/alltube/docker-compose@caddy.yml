@@ -1,0 +1,13 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  alltube:
+    networks:
+      - caddy
+    labels:
+      caddy: alltube.local, alltube.local:80
+      caddy.reverse_proxy: "{{ upstreams 80 }}"

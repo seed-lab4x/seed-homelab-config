@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  alltube:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.alltube.rule=Host(`alltube.local`)"
+      - "traefik.http.services.alltube.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik_traefik"

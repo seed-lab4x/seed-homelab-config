@@ -1,0 +1,10 @@
+# code: language=ansible
+
+alltube:
+  composes:
+    - file: docker-compose.yml
+      template: "{{ playbook_dir }}/docker-compose.yml"
+    - file: docker-compose@caddy.yml
+      src: "{{ inventory_dir }}/../alltube/docker-compose@caddy.yml"
+    - file: docker-compose@traefik.yml
+      src: "{{ inventory_dir }}/../alltube/docker-compose@traefik.yml"
