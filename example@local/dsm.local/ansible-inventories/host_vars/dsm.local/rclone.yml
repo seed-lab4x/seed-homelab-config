@@ -1,0 +1,60 @@
+# code: language=ansible
+
+rclone:
+  mode: role
+
+  config:
+    # conf:
+    #   - name: gdrive-example
+    #     properties:
+    #       type: drive
+    #       client_id: YOUR_CLIENT_ID
+    #       client_secret: YOUR_CLIENT_SECRET
+    #       scope: drive
+    #       root_folder_id: root
+    #       token: YOUR_TOKEN
+    #       team_drive:
+    # dest: "/var/services/homes/{{ ansible_user_id }}/.config/rclone/rclone.conf"
+    # mounts:
+    #   - remote: gdrive-example
+    #     point: "/var/services/homes/{{ ansible_user_id }}/gdrive"
+    #     flags: |
+    #       --allow-other \
+    #       --allow-non-empty \
+    #       --buffer-size 32M \
+    #       --vfs-read-chunk-size=32M \
+    #       --vfs-read-chunk-size-limit 2048M \
+    #       --vfs-cache-mode writes \
+    #       --dir-cache-time 96h \
+    #       --daemon
+    #     env:
+    #       http_proxy: http://localhost:7890
+    #       https_proxy: $http_proxy
+    #       HTTP_PROXY: $http_proxy
+    #       HTTPS_PROXY: $http_proxy
+
+  groups:
+    - gdrive_example
+
+rclone_groups:
+  gdrive_example:
+    config:
+      src: "{{ inventory_dir }}/../rclone/gdrive-example.conf"
+      dest: "/var/services/homes/{{ ansible_user_id }}/.config/rclone/gdrive-example.conf"
+      mounts:
+        - remote: gdrive-example
+          point: "/var/services/homes/{{ ansible_user_id }}/rclone/gdrive-example"
+          flags: |
+            --allow-other \
+            --allow-non-empty \
+            --buffer-size 32M \
+            --vfs-read-chunk-size=32M \
+            --vfs-read-chunk-size-limit 2048M \
+            --vfs-cache-mode writes \
+            --dir-cache-time 96h \
+            --daemon
+          env:
+            http_proxy: http://localhost:7890
+            https_proxy: $http_proxy
+            HTTP_PROXY: $http_proxy
+            HTTPS_PROXY: $http_proxy

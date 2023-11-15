@@ -3,6 +3,8 @@
 roles:
   - name: mrlesmithjr.mdadm
 
+  - name: stefangweichinger.ansible_rclone
+
 collections:
   - name: community.general
 
