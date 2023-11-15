@@ -5,6 +5,8 @@ roles:
 
   - name: comcast.sdkman
 
+  - name: stefangweichinger.ansible_rclone
+
 collections:
 
   - name: community.general
