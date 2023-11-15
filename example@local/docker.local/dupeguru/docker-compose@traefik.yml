@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  dupeguru:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.dupeguru.rule=Host(`dupeguru.local`)"
+      - "traefik.http.services.dupeguru.loadbalancer.server.port=5800"
+      - "traefik.docker.network=traefik_traefik"
