@@ -1,0 +1,13 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  syncthing:
+    networks:
+      - caddy
+    labels:
+      caddy: syncthing.local, syncthing.local:80
+      caddy.reverse_proxy: "{{ upstreams 8384 }}"
