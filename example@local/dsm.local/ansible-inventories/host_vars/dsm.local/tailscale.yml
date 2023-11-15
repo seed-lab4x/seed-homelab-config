@@ -1,0 +1,9 @@
+# code: language=ansible
+
+tailscale:
+  # TODO synopkg install 'failed to sort spks, the spk might not exist or invalid format'
+  spk_url: https://global.synologydownload.com/download/Package/spk/Tailscale/1.38.4-700038004/tailscale-x86_64-1.38.4-700038004-dsm7.spk
+  # authkey: ?
+  # network:
+  #   flags: |
+  #     --advertise-exit-node
