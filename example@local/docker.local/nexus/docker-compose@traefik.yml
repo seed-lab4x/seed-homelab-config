@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  nexus3:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.nexus.rule=Host(`nexus.local`)"
+      - "traefik.http.services.nexus.loadbalancer.server.port=8081"
+      - "traefik.docker.network=traefik_traefik"

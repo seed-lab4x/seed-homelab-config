@@ -1,0 +1,13 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  nexus3:
+    networks:
+      - caddy
+    labels:
+      caddy: nexus.local, nexus.local:80
+      caddy.reverse_proxy: "{{ upstreams 8081 }}"
