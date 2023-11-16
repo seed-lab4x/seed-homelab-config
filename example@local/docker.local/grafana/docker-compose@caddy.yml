@@ -1,0 +1,13 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  grafana:
+    networks:
+      - caddy
+    labels:
+      caddy: grafana.local, grafana.local:80
+      caddy.reverse_proxy: "{{ upstreams 3000 }}"
