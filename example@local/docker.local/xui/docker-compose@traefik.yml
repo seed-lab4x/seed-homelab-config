@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  xui:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.xui.rule=Host(`xui.local`)"
+      - "traefik.http.services.xui.loadbalancer.server.port=54321"
+      - "traefik.docker.network=traefik_traefik"
