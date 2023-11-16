@@ -1,0 +1,13 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  transmission:
+    networks:
+      - caddy
+    labels:
+      caddy: transmission.local, transmission.local:80
+      caddy.reverse_proxy: "{{ upstreams 9091 }}"
