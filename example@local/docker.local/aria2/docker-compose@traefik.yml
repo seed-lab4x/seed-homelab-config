@@ -1,0 +1,22 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  aria2-pro:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.aria2-pro.rule=Host(`aria2.local`)"
+      - "traefik.http.services.aria2-pro.loadbalancer.server.port=6800"
+      - "traefik.docker.network=traefik_traefik"
+
+  ariang:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.ariang.rule=Host(`ariang.local`)"
+      - "traefik.http.services.ariang.loadbalancer.server.port=6880"
+      - "traefik.docker.network=traefik_traefik"

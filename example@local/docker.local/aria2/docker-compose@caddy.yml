@@ -1,0 +1,22 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  aria2-pro:
+    environment:
+      - RPC_SECRET=aria2.123
+    networks:
+      - caddy
+    labels:
+      caddy: aria2.local, aria2.local:80
+      caddy.reverse_proxy: "{{ upstreams 6800 }}"
+
+  ariang:
+    networks:
+      - caddy
+    labels:
+      caddy: ariang.local, ariang.local:80
+      caddy.reverse_proxy: "{{ upstreams 6880 }}"
