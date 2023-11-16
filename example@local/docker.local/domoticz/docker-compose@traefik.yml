@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  domoticz:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.domoticz.rule=Host(`domoticz.local`)"
+      - "traefik.http.services.domoticz.loadbalancer.server.port=8080"
+      - "traefik.docker.network=traefik_traefik"
