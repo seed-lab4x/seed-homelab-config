@@ -1,0 +1,13 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  gitlab-ce:
+    networks:
+      - caddy
+    labels:
+      caddy: gitlab.local, gitlab.local:80
+      caddy.reverse_proxy: "{{ upstreams 80 }}"
