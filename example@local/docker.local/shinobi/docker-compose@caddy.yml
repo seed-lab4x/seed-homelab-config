@@ -1,0 +1,13 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  shinobi:
+    networks:
+      - caddy
+    labels:
+      caddy: shinobi.local, shinobi.local:80
+      caddy.reverse_proxy: "{{ upstreams 8080 }}"

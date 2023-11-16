@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  shinobi:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.shinobi.rule=Host(`shinobi.local`)"
+      - "traefik.http.services.shinobi.loadbalancer.server.port=8080"
+      - "traefik.docker.network=traefik_traefik"
