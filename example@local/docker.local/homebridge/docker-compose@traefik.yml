@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  homebridge:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.homebridge.rule=Host(`homebridge.local`)"
+      - "traefik.http.services.homebridge.loadbalancer.server.port=8581"
+      - "traefik.docker.network=traefik_traefik"
