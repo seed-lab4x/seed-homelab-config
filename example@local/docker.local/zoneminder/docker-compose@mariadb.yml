@@ -1,0 +1,16 @@
+version: "3.8"
+
+networks:
+  mariadb:
+    name: mariadb_mariadb
+
+services:
+  database-init:
+    image: mariadb:11.1.2
+    command: mariadb --host=mariadb --user=root --password=mariadb.123 --database=mysql --execute='CREATE DATABASE IF NOT EXISTS `zm`;'
+    networks:
+      - mariadb
+
+  zoneminder:
+    networks:
+      - mariadb

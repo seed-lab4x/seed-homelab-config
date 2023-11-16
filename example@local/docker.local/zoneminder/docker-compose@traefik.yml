@@ -1,0 +1,14 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  zoneminder:
+    networks:
+      - traefik
+    labels:
+      - "traefik.http.routers.zoneminder.rule=Host(`zoneminder.local`)"
+      - "traefik.http.services.zoneminder.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik_traefik"
