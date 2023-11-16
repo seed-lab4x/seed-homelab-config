@@ -1,0 +1,13 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  homeassistant:
+    networks:
+      - caddy
+    labels:
+      caddy: homeassistant.local, homeassistant.local:80
+      caddy.reverse_proxy: "{{ upstreams 8123 }}"
