@@ -1,0 +1,7 @@
+# code: language=ansible
+
+caddy:
+  docker_proxy:
+    files:
+      - src: "{{ inventory_dir }}/../caddy/Caddyfile"
+        dest: "{{ workpath.remote.full }}/bind_file-Caddyfile"
