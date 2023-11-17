@@ -1,0 +1,15 @@
+version: "3.8"
+
+networks:
+  caddy:
+    name: caddy_caddy
+
+services:
+  frp-server:
+    networks:
+      - caddy
+    labels:
+      caddy_0: "*.frp.local, *.frp.local:80"
+      caddy_0.reverse_proxy: "{{ upstreams 80 }}"
+      caddy_1: dashboard.frp.local, dashboard.frp.local:80
+      caddy_1.reverse_proxy: "{{ upstreams 7500 }}"

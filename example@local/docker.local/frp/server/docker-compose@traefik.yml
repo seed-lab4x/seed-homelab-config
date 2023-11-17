@@ -1,0 +1,21 @@
+version: "3.8"
+
+networks:
+  traefik:
+    name: traefik_traefik
+
+services:
+  frp-server:
+    networks:
+      - traefik
+    labels:
+      - 'traefik.http.routers.frp_subdomain.rule=HostRegexp(`{subdomain:[a-z0-9]+}.frp.local`)'
+      - "traefik.http.routers.frp_subdomain.service=frp_subdomain"
+      - "traefik.http.services.frp_subdomain.loadbalancer.server.port=80"
+      - 'traefik.http.routers.frp_dashboard.rule=Host(`dashboard.frp.local`)'
+      - "traefik.http.routers.frp_dashboard.service=frp_dashboard"
+      - "traefik.http.services.frp_dashboard.loadbalancer.server.port=7500"
+      - 'traefik.http.routers.frp.rule=Host(`frp.local`)'
+      - "traefik.http.routers.frp.service=frp"
+      - "traefik.http.services.frp.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik_traefik"
