@@ -1,0 +1,4 @@
+# code: language=ansible
+
+devbox:
+  mode: normal
